@@ -2,6 +2,9 @@
 two old spaceship games found on the wayback machine for the defunct website
 https://web.archive.org/web/20081209035052/http://www.dunnington.u-net.com/public/startrek/
 
+- *startrek aka SUPER STARTREK* by Bob Leedom (C port by Chris Nystrom)
+- *Trek* by Eric P Allman
+
 I made them compile with DJGPP, added/changed the Makefiles and bundled the EXE with the DOCs.
 The programs start in DOSBox, gameplay is untested (by me)...
 
