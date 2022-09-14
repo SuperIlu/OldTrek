@@ -50,3 +50,9 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+trek/TREK.DUM
+dosbox.conf
+trek/read_me.pdf
+trek/trek.pdf
+trek/trek_mp.pdf
+trek/trek_mp.ps
