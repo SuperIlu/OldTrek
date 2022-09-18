@@ -12,8 +12,8 @@
  *    documentation and/or other materials provided with the distribution.
  * 3. All advertising materials mentioning features or use of this software
  *    must display the following acknowledgement:
- *	This product includes software developed by the University of
- *	California, Berkeley and its contributors.
+ *      This product includes software developed by the University of
+ *      California, Berkeley and its contributors.
  * 4. Neither the name of the University nor the names of its contributors
  *    may be used to endorse or promote products derived from this software
  *    without specific prior written permission.
@@ -32,7 +32,7 @@
  */
 
 #ifndef lint
-static char sccsid[] = "@(#)capture.c	5.4 (Berkeley) 6/1/90";
+static char sccsid[] = "@(#)capture.c   5.4 (Berkeley) 6/1/90";
 #endif /* not lint */
 
 #include <stdio.h>
@@ -41,15 +41,15 @@ static char sccsid[] = "@(#)capture.c	5.4 (Berkeley) 6/1/90";
 /*
 **  Ask a Klingon To Surrender
 **
-**	(Fat chance)
+**      (Fat chance)
 **
-**	The Subspace Radio is needed to ask a Klingon if he will kindly
-**	surrender.  A random Klingon from the ones in the quadrant is
-**	chosen.
+**      The Subspace Radio is needed to ask a Klingon if he will kindly
+**      surrender.  A random Klingon from the ones in the quadrant is
+**      chosen.
 **
-**	The Klingon is requested to surrender.  The probability of this
-**	is a function of that Klingon's remaining power, our power,
-**	etc.
+**      The Klingon is requested to surrender.  The probability of this
+**      is a function of that Klingon's remaining power, our power,
+**      etc.
 */
 
 void capture(void) {
@@ -63,7 +63,10 @@ void capture(void) {
         printf("Ship-ship communications out when cloaked\n");
         return;
     }
-    if (damaged(SSRADIO)) return (out(SSRADIO));
+    if (damaged(SSRADIO)) {
+        out(SSRADIO);
+        return;
+    }
     /* find out if there are any at all */
     if (Etc.nkling <= 0) {
         printf("Uhura: Getting no response, sir\n");
@@ -105,7 +108,7 @@ void capture(void) {
 /*
 **  SELECT A KLINGON
 **
-**	Cruddy, just takes one at random.  Should ask the captain.
+**      Cruddy, just takes one at random.  Should ask the captain.
 */
 
 struct kling *selectklingon() {

@@ -60,7 +60,10 @@ void nova(int x, int y) {
         printf("Spock: Star at %d,%d failed to nova.\n", x, y);
         return;
     }
-    if (ranf(100) < 5) return (snova(x, y));
+    if (ranf(100) < 5) {
+        snova(x, y);
+        return;
+    }
     printf("Spock: Star at %d,%d gone nova\n", x, y);
 
     if (ranf(4) != 0)

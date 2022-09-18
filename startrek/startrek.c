@@ -137,7 +137,7 @@ void sub2(void);
 void showfile(char *filename);
 int openfile(char *sFilename, char *sMode);
 void closefile(void);
-int getline(char *s);
+int getline_st(char *s);
 void randomize(void);
 int get_rand(int iSpread);
 double rnd(void);
@@ -1617,7 +1617,7 @@ void showfile(char *filename) {
 
     if (openfile(filename, "r") != 0) return;
 
-    while (getline(lBuffer) != 0) {
+    while (getline_st(lBuffer) != 0) {
         printf(lBuffer);
 
         if (iRow++ > MAXROW - 3) {
@@ -1646,7 +1646,7 @@ void closefile(void) {
     bFlag = FALSE;
 }
 
-int getline(char *s) {
+int getline_st(char *s) {
     if (fgets(s, MAXCOL, stream) == NULL)
         return (0);
     else

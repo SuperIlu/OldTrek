@@ -59,6 +59,7 @@ int events(int warp) {
     register struct event *e;
     int evnum;
     int restcancel;
+    char *ptr;
 
     /* if nothing happened, just allow for any Klingons killed */
     if (Move.time <= 0.0) {
@@ -324,7 +325,7 @@ int events(int warp) {
 
             case E_SNAP: /* take a snapshot of the galaxy */
                 xresched(e, E_SNAP, 1);
-                char *ptr = Etc.snapshot;
+                ptr = Etc.snapshot;
                 ptr = bmove(Quad, ptr, sizeof(Quad));
                 ptr = bmove(Event, ptr, sizeof(Event));
                 ptr = bmove(&Now, ptr, sizeof(Now));

@@ -56,3 +56,8 @@ trek/read_me.pdf
 trek/trek.pdf
 trek/trek_mp.pdf
 trek/trek_mp.ps
+*.err
+*.lk1
+*.mk
+*.mk1
+*.sym

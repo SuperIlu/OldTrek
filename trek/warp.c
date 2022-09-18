@@ -63,6 +63,7 @@ void warp(int fl, int c, double d) {
     double frac;
     register int percent;
     register int i;
+    char *ptr;
     extern double move();
 
     if (Ship.cond == DOCKED) {
@@ -144,7 +145,7 @@ void warp(int fl, int c, double d) {
 
         /* s/he got lucky: a negative time portal */
         time = Now.date;
-        char *ptr = Etc.snapshot;
+        ptr = Etc.snapshot;
         bmove(ptr, Quad, sizeof Quad);
         bmove(ptr += sizeof Quad, Event, sizeof Event);
         bmove(ptr += sizeof Event, &Now, sizeof Now);
