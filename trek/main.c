@@ -189,17 +189,17 @@ int main(int argc, char **argv) {
                 Etc.fast = 0;
                 break;
 
-#ifdef xTRACE
-            case 't': /* trace */
-                if (getuid() != Mother) goto badflag;
-                Trace++;
-                break;
-#endif
+                // #ifdef xTRACE
+                //             case 't': /* trace */
+                //                 if (getuid() != Mother) goto badflag;
+                //                 Trace++;
+                //                 break;
+                // #endif
 
-            case 'p': /* set priority */
-                if (getuid() != Mother) goto badflag;
-                prio = atoi(av[0] + 2);
-                break;
+                //             case 'p': /* set priority */
+                //                 if (getuid() != Mother) goto badflag;
+                //                 prio = atoi(av[0] + 2);
+                //                 break;
 
             default:
             badflag:

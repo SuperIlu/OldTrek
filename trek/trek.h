@@ -63,6 +63,12 @@
 
 #include "getpar.h"
 
+#ifdef NO_EXTERN
+#define _EXTERN_
+#else
+#define _EXTERN_ extern
+#endif
+
 /* external function definitions */
 // extern double franf();      /* floating random number function */
 // extern double sqrt();       /* square root */
@@ -111,7 +117,7 @@ struct quad /* definition for each quadrant */
 extern char *Systemname[NINHAB];
 
 /* quadrant definition */
-struct quad Quad[NQUADS][NQUADS];
+_EXTERN_ struct quad Quad[NQUADS][NQUADS];
 
 /* defines for sector map  (below) */
 #define EMPTY '.'
@@ -124,7 +130,7 @@ struct quad Quad[NQUADS][NQUADS];
 #define HOLE ' '
 
 /* current sector map */
-char Sect[NSECTS][NSECTS];
+_EXTERN_ char Sect[NSECTS][NSECTS];
 
 /************************ DEVICES ******************************/
 
@@ -152,7 +158,7 @@ struct device {
     char *person; /* the person who fixes it */
 };
 
-struct device Device[NDEV];
+_EXTERN_ struct device Device[NDEV];
 
 /***************************  EVENTS  ****************************/
 
@@ -191,7 +197,7 @@ struct event {
 
 #define MAXEVENTS 25 /* max number of concurrently pending events */
 
-struct event Event[MAXEVENTS]; /* dynamic event list; one entry per pending event */
+_EXTERN_ struct event Event[MAXEVENTS]; /* dynamic event list; one entry per pending event */
 
 /*****************************  KLINGONS  *******************************/
 
@@ -232,7 +238,7 @@ struct xy {
  */
 
 /* information regarding the state of the starship */
-struct {
+_EXTERN_ struct {
     double warp;     /* warp factor */
     double warp2;    /* warp factor squared */
     double warp3;    /* warp factor cubed */
@@ -259,7 +265,7 @@ struct {
 /* sinsbad is set if SINS is working but not calibrated */
 
 /* game related information, mostly scoring */
-struct {
+_EXTERN_ struct {
     int killk;       /* number of klingons killed */
     int deaths;      /* number of deaths onboard Enterprise */
     char negenbar;   /* number of hits on negative energy barrier */
@@ -277,7 +283,7 @@ struct {
 } Game;
 
 /* per move information */
-struct {
+_EXTERN_ struct {
     char free;    /* set if a move is free */
     char endgame; /* end of game flag */
     char shldchg; /* set if shields changed this move */
@@ -287,7 +293,7 @@ struct {
 } Move;
 
 /* parametric information */
-struct {
+_EXTERN_ struct {
     char bases;               /* number of starbases */
     char klings;              /* number of klingons */
     double date;              /* stardate */
@@ -322,7 +328,7 @@ struct {
 /* Sum of damage probabilities must add to 1000 */
 
 /* other information kept in a snapshot */
-struct {
+_EXTERN_ struct {
     char bases;                      /* number of starbases */
     char klings;                     /* number of klingons */
     double date;                     /* stardate */
@@ -334,7 +340,7 @@ struct {
 } Now;
 
 /* Other stuff, not dumped in a snapshot */
-struct {
+_EXTERN_ struct {
     struct kling klingon[MAXKLQUAD];                        /* sorted Klingon list */
     char nkling;                                            /* number of Klingons in this sector */
                                                             /* < 0 means automatic override mode */
@@ -376,7 +382,7 @@ struct {
 
 /* Trace info */
 #define xTRACE 1
-int Trace;
+_EXTERN_ int Trace;
 
 extern char *systemname(int i);
 extern int check_out(int device);
@@ -434,10 +440,10 @@ extern void visual(void);
 extern void warp(int fl, int c, double d);
 extern void win(void);
 extern void xresched(struct event *e1, int ev1, int factor);
-void ram(int ix, int iy);
-void rest(void);
-void srscan(int f);
-void setwarp();
+extern void ram(int ix, int iy);
+extern void rest(void);
+extern void srscan(int f);
+extern void setwarp();
 
 extern char cgetc(int i);
 extern int getintpar(char *s);
