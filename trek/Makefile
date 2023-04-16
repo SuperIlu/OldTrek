@@ -1,6 +1,7 @@
 #	@(#)Makefile	5.8 (Berkeley) 5/11/90
 
-PROG=	trek.exe
+PROG32=trek32.exe
+PROG16=trek16.exe
 
 DESTDIR=/usr/bin/games
 LIBDIR= $(DESTDIR)/lib
@@ -11,6 +12,8 @@ CC=i586-pc-msdosdjgpp-gcc
 CFLAGS= -O2
 LDFLAGS=-s
 
+WCC=wcl
+
 SRCS=	abandon.c attack.c autover.c capture.c check_out.c checkcond.c \
 	compkl.c computer.c damage.c damaged.c dcrept.c destruct.c \
 	dock.c dumpgame.c dumpme.c dumpssradio.c events.c externs.c \
@@ -19,31 +22,33 @@ SRCS=	abandon.c attack.c autover.c capture.c check_out.c checkcond.c \
 	ranf.c rest.c schedule.c score.c setup.c setwarp.c \
 	shield.c snova.c srscan.c systemname.c torped.c utility.c \
 	visual.c warp.c win.c cgetc.c
-OBJS=	abandon.o attack.o autover.o capture.o check_out.o checkcond.o \
-	compkl.o computer.o damage.o damaged.o dcrept.o destruct.o \
-	dock.o dumpgame.o dumpme.o dumpssradio.o events.o externs.o \
-	getcodi.o getpar.o help.o impulse.o initquad.o kill.o klmove.o \
-	lose.o lrscan.o main.o move.o nova.o out.o phaser.o play.o ram.o \
-	ranf.o rest.o schedule.o score.o setup.o setwarp.o \
-	shield.o snova.o srscan.o systemname.o torped.o utility.o \
-	visual.o warp.o win.o cgetc.o
+
+OBJS32=$(SRCS:.c=.o)
+OBJS16=$(SRCS:.c=.obj)
+
 # INCS=	-I/usr/include/bsd
 LIBS=	-lm
 
-all: ${PROG} doc
+all: ${PROG32} ${PROG16} doc
 
-$(PROG):	$(OBJS)
-	$(CC) $(LDFLAGS) $(OBJS) $(LIBS) -o $(PROG)
+$(PROG32): $(OBJS32)
+	$(CC) $(LDFLAGS) $(LIBS) -o $@ $(OBJS32)
+
+$(PROG16): $(OBJS16)
+	$(WCC) -fe=$@ $(OBJS16)
 
 %.o: %.c getpar.h trek.h
 	$(CC) $(CFLAGS) $(INCS) -c $< -o $@
+
+%.obj: %.c getpar.h trek.h
+	$(WCC) $< -c -w4 -e25 -zq -os -of -oh -bt=dos -fo=.obj -ml
 
 install:	all
 	install -c -o bin -g root -m 755 $(PROG) $(DESTDIR)
 	install -c -o root -g root -m 444 $(PROG).6 $(MANDIR)
 
 clean:
-	rm -f $(PROG) core *.o trek.ps trek.pdf read_me.pdf trek_mp.pdf
+	rm -f $(PROG16) $(PROG32) core *.o *.err *.obj trek.ps trek.pdf read_me.pdf trek_mp.pdf
 
 doc:
 	man -t ./trek.6 >trek_mp.ps
